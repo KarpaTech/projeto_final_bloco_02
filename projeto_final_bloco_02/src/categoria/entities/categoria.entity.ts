@@ -1,5 +1,6 @@
 // import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty } from "class-validator";
+import { Produto } from "src/produto/entities /produto.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({name: "tb_categorias"})
@@ -24,9 +25,11 @@ export class Categoria {
     data: Date
     
     // @ApiProperty({ type: () => Tema })  
-    // @ManyToOne(() => Tema, (tema) => tema.postagem, {
-    //     onDelete: "CASCADE"
-    // })
+    @ManyToOne(() => Produto, (produto) => produto.categoria, {
+        onDelete: "CASCADE"
+    })
+    categoria: Categoria
+    produto: any;
 
 
     // @ApiProperty({ type: () => Usuario })  
