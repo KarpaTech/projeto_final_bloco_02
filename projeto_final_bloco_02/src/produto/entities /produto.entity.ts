@@ -1,6 +1,6 @@
 import { IsNotEmpty } from "class-validator";
 import { Categoria } from "src/categoria/entities/categoria.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: "tb_produtos"})
 export class Produto {
@@ -11,7 +11,10 @@ export class Produto {
     @IsNotEmpty()
     @Column({length: 255, nullable: false})
     preco: string
-    
-    @OneToMany(() => Categoria, (categoria) => categoria.produto)
-    categoria: Categoria[]
+
+      // @ApiProperty({ type: () => Tema })
+  @ManyToOne(() => Categoria, (categoria) => categoria.produto, {
+    onDelete: 'CASCADE',
+  })
+  categoria: Categoria;
 }

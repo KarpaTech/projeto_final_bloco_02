@@ -9,24 +9,24 @@ export class CategoriaService {
   constructor(
     @InjectRepository(Categoria)
     private categoriaRepository: Repository<Categoria>,
-    private produtoService: ProdutoService
+    private produtoService: ProdutoService,
   ) {}
 
   async findAll(): Promise<Categoria[]> {
     return await this.categoriaRepository.find({
       relations: {
-        categoria: true,
+        produto: true,
       },
     });
   }
-
+    
   async findById(id: number): Promise<Categoria> {
     let categoria = await this.categoriaRepository.findOne({
       where: {
         id,
       },
       relations: {
-        categoria: true,
+        produto: true,
       },
     });
 
@@ -45,7 +45,7 @@ export class CategoriaService {
         descricao: ILike(`%${descricao}%`),
       },
       relations: {
-        categoria: true,
+        produto: true,
       },
     });
   }
@@ -55,9 +55,9 @@ export class CategoriaService {
   }
 
   async update(categoria: Categoria): Promise<Categoria> {
-    await this.findById(categoria.id)
+    await this.findById(categoria.id);
 
-    await this.produtoService.findById(categoria.produto.id)
+ 
 
     return await this.categoriaRepository.save(categoria);
   }
