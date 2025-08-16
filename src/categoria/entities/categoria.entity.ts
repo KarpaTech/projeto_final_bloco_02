@@ -1,6 +1,6 @@
 // import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty } from 'class-validator';
-import { Produto } from 'src/produto/entities /produto.entity';
+import { Produto } from '../../produto/entities /produto.entity';
 import {Column, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 
 @Entity({ name: 'tb_categorias' })
